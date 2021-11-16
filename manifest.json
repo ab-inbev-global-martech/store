@@ -1,14 +1,16 @@
 {
-  "vendor": "vtex",
-  "name": "store",
-  "version": "2.120.1",
-  "title": "VTEX Store",
-  "description": "The VTEX basic store.",
+  "vendor": "tapitdev",
+  "name": "global-context",
+  "version": "0.0.0",
+  "title": "Tap It VTEX Store",
+  "description": "The VTEX basic store for Tap It.",
   "builders": {
     "store": "0.x",
     "messages": "1.x",
     "react": "3.x",
-    "docs": "0.x"
+    "docs": "0.x",
+    "node": "6.x",
+    "graphql": "1.x"
   },
   "dependencies": {
     "vtex.store-indexer": "0.x",
@@ -254,5 +256,23 @@
       "*"
     ]
   },
+  "policies": [
+    {
+      "name": "graphql-query"
+    },
+    {
+      "name": "colossus-fire-event"
+    },
+    {
+      "name": "colossus-write-logs"
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "86ec07fd-67d5-4714-a9eb-75c68a37ff0b.mock.pstmn.io",
+        "path": "/client/market"
+      }
+    }
+  ],
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

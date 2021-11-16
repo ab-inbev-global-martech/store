@@ -1,0 +1,22 @@
+type ClientData {
+    email: String!
+    mongoId: ID!
+    actual_points: String!
+    address: String
+    state: String
+    firstName: String!
+    lastName: String
+    giftcard: GiftcardData
+}
+
+type GiftcardData {
+    id: ID!
+    redemptionCode: String!
+}
+
+type Query {
+    userSession: ClientData @cacheControl(scope: PUBLIC)
+}
+
+
+

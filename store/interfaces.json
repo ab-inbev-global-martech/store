@@ -84,7 +84,10 @@
   },
   "storeWrapper": {
     "allowed": ["highlight-overlay"],
-    "component": "StoreWrapper"
+    "component": "StoreWrapper",
+    "props": {
+      "CustomContext": "CustomContext"
+    }
   },
   "homeWrapper": {
     "component": "HomeWrapper"
@@ -122,5 +125,8 @@
   "__fold__.mobile": {},
   "__fold__.desktop": {},
   "__fold__.experimentalLazyImages": {},
-  "__fold__.experimentalLazyAssets": {}
+  "__fold__.experimentalLazyAssets": {},
+  "CustomContext": {
+    "component": "CustomContext"
+  }
 }
