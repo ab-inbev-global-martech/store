@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.0.1] - 2021-11-16
+
 ## [2.120.1] - 2021-08-31
 ### Fixed
 - Canonical url on search pages that explicitly need `map` query strings declarations.
