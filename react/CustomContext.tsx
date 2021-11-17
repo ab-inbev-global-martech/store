@@ -6,7 +6,7 @@ import userSessionGQL from './graphql/userSession.graphql'
 const GlobalContext = React.createContext<any>([])
 
 
-export const types = {
+const types = {
     updateLocation: 'update location',
     showModal: 'Show city modal'
 }
@@ -83,10 +83,12 @@ function useGlobalContext(): any {
 
 export {
   GlobalProvider,
-  useGlobalContext
+  useGlobalContext,
+  types
 }
 
 export default {
   GlobalProvider,
-  useGlobalContext
+  useGlobalContext,
+  types
 }
