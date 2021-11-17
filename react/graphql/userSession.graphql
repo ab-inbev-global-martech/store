@@ -1,0 +1,15 @@
+query userSession {
+  userSession {
+    email
+    mongoId
+    actual_points
+    address
+    state
+    firstName
+    lastName
+    giftcard{
+      id
+      redemptionCode
+    }
+  }
+}

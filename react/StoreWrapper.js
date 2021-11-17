@@ -14,7 +14,7 @@ import { PWAProvider } from 'vtex.store-resources/PWAContext'
 import { OrderQueueProvider } from 'vtex.order-manager/OrderQueue'
 import { OrderItemsProvider } from 'vtex.order-items/OrderItems'
 import { OrderFormProvider as OrderFormProviderCheckout } from 'vtex.order-manager/OrderForm'
-import CustomGlobalContext from './CustomContext'
+import { GlobalProvider } from './CustomContext'
 import UserDataPixel from './components/UserDataPixel'
 import PageViewPixel from './components/PageViewPixel'
 import OrderFormProvider from './components/OrderFormProvider'
@@ -106,7 +106,7 @@ const StoreWrapper = ({ children, CustomContext }) => {
 
   const parsedFavicons = useFavicons(faviconLinks)
 
-  const CustomContextElement = CustomContext || CustomGlobalContext || Fragment
+  const CustomContextElement = CustomContext || GlobalProvider || Fragment
 
   const content = (
     <OrderQueueProvider>

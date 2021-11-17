@@ -1,7 +1,9 @@
 import React, { FC, useReducer, useState } from 'react'
+import { useQuery } from 'react-apollo'
+import userSessionGQL from './graphql/userSession.graphql'
 
 //create context and consumer
-const CitySelectorContext = React.createContext<any>([])
+const GlobalContext = React.createContext<any>([])
 
 
 export const types = {
@@ -10,7 +12,6 @@ export const types = {
 }
 
 export const reducer = (state: any, { type, payload }: { type: string, payload: any }) => {
-    // console.log('payload: ', payload)
     switch(type) {
         case types.updateLocation: {
             const { city, postalCode, state } = payload
@@ -46,7 +47,9 @@ const initialCity = {
     state: 'Bogotá, D.C.'
 }
 
-const CitySelectorProvider: FC = ({ children }) => {
+const GlobalProvider: FC = ({ children }) => {
+    const { data } = useQuery(userSessionGQL)
+
     const [ currentLocation ] = useState(() => {
         try {
             const currentLocation = window?.localStorage.getItem('currentLocation')
@@ -57,15 +60,28 @@ const CitySelectorProvider: FC = ({ children }) => {
     })
 
     const initialState = {
+        userSession: data?.userSession || null,
         currentLocation,
         showModalSelector: false
     }
 
+    const [store, dispatch] = useReducer(reducer, initialState)
+
     return (
-        <CitySelectorContext.Provider value={useReducer(reducer, initialState)}>
+        <GlobalContext.Provider value={{store, dispatch}}>
             {children}
-        </CitySelectorContext.Provider>
+        </GlobalContext.Provider>
     )
 }
 
-export default CitySelectorProvider
+
+
+// custom hook
+function useGlobalContext(): any {
+    return React.useContext(GlobalContext)
+}
+
+export {
+  GlobalProvider,
+  useGlobalContext
+}
