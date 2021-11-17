@@ -85,3 +85,8 @@ export {
   GlobalProvider,
   useGlobalContext
 }
+
+export default {
+  GlobalProvider,
+  useGlobalContext
+}
