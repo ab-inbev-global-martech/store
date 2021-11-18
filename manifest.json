@@ -1,7 +1,7 @@
 {
   "vendor": "tapitdev",
   "name": "global-context",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "title": "Tap It VTEX Store",
   "description": "The VTEX basic store for Tap It.",
   "builders": {
