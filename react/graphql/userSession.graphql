@@ -1,5 +1,5 @@
-query userSession {
-  userSession {
+query userSession($token: String!) {
+  userSession(token: $token) {
     email
     mongoId
     actual_points

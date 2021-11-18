@@ -7,12 +7,21 @@ const GlobalContext = React.createContext<any>([])
 
 
 const types = {
+    setUserData: 'set user data',
     updateLocation: 'update location',
     showModal: 'Show city modal'
 }
 
 export const reducer = (state: any, { type, payload }: { type: string, payload: any }) => {
     switch(type) {
+        case types.setUserData: {
+            const { userSession } = payload
+
+            return {
+                ...state,
+                userSession
+            }
+        }
         case types.updateLocation: {
             const { city, postalCode, state } = payload
 
@@ -48,7 +57,6 @@ const initialCity = {
 }
 
 const GlobalProvider: FC = ({ children }) => {
-    const [ userSession, setUserSession ] = useState(null)
     const [ currentLocation ] = useState(() => {
         try {
             const currentLocation = window?.localStorage.getItem('currentLocation')
@@ -74,7 +82,9 @@ const GlobalProvider: FC = ({ children }) => {
 
     useEffect(() => {
         if (!loading && data) {
-            setUserSession(data?.userSession)
+            dispatch({ type: types.setUserData, payload: {
+                userSession: data.userSession
+            }})
         }
     }, [data])
 
@@ -85,7 +95,7 @@ const GlobalProvider: FC = ({ children }) => {
     }
 
     const initialState = {
-        userSession,
+        userSession: data?.userSession || null,
         currentLocation,
         showModalSelector: false
     }
