@@ -48,9 +48,7 @@ const initialCity = {
 }
 
 const GlobalProvider: FC = ({ children }) => {
-    const [getUserData, { data }] = useLazyQuery(userSessionGQL, {
-        variables: { token: window?.localStorage.getItem('customToken') }
-    })
+    const [getUserData, { data }] = useLazyQuery(userSessionGQL)
 
     const [ currentLocation ] = useState(() => {
         try {
@@ -66,7 +64,9 @@ const GlobalProvider: FC = ({ children }) => {
         const customToken = getUrlParam('customToken') || window?.localStorage.getItem('customToken')
         if(customToken){
             window.localStorage.setItem('customToken', customToken)
-            getUserData()
+            getUserData({
+                variables: { token: window?.localStorage.getItem('customToken') }
+            })
         }else{
             // window.location.href = 'https://tapit.com.co'
         }
