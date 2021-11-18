@@ -48,8 +48,7 @@ const initialCity = {
 }
 
 const GlobalProvider: FC = ({ children }) => {
-    const [getUserData, { data }] = useLazyQuery(userSessionGQL)
-
+    const [ userSession, setUserSession ] = useState(null)
     const [ currentLocation ] = useState(() => {
         try {
             const currentLocation = window?.localStorage.getItem('currentLocation')
@@ -58,6 +57,7 @@ const GlobalProvider: FC = ({ children }) => {
             return initialCity
         }
     })
+    const [getUserData, { data, loading }] = useLazyQuery(userSessionGQL)
 
     useEffect(()=>{
         // check for user auth with custom token
@@ -72,6 +72,12 @@ const GlobalProvider: FC = ({ children }) => {
         }
     }, [])
 
+    useEffect(() => {
+        if (!loading && data) {
+            setUserSession(data?.userSession)
+        }
+    }, [data])
+
     const getUrlParam = (paramName: string): string => {
         const url = new URL(window.location.href)
         const urlParam = url.searchParams.get(paramName)
@@ -79,7 +85,7 @@ const GlobalProvider: FC = ({ children }) => {
     }
 
     const initialState = {
-        userSession: data?.userSession || null,
+        userSession,
         currentLocation,
         showModalSelector: false
     }
