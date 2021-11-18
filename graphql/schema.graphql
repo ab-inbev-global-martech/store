@@ -15,7 +15,7 @@ type GiftcardData {
 }
 
 type Query {
-    userSession: ClientData @cacheControl(scope: PUBLIC)
+    userSession(token: String!): ClientData @cacheControl(scope: PUBLIC)
 }
 
 

@@ -1,5 +1,5 @@
-import React, { FC, useReducer, useState } from 'react'
-import { useQuery } from 'react-apollo'
+import React, { FC, useState, useEffect, useReducer } from 'react'
+import { useLazyQuery } from 'react-apollo'
 import userSessionGQL from './graphql/userSession.graphql'
 
 //create context and consumer
@@ -48,7 +48,9 @@ const initialCity = {
 }
 
 const GlobalProvider: FC = ({ children }) => {
-    const { data } = useQuery(userSessionGQL)
+    const [getUserData, { data }] = useLazyQuery(userSessionGQL, {
+        variables: { token: window?.localStorage.getItem('customToken') }
+    })
 
     const [ currentLocation ] = useState(() => {
         try {
@@ -58,6 +60,23 @@ const GlobalProvider: FC = ({ children }) => {
             return initialCity
         }
     })
+
+    useEffect(()=>{
+        // check for user auth with custom token
+        const customToken = getUrlParam('customToken') || window?.localStorage.getItem('customToken')
+        if(customToken){
+            window.localStorage.setItem('customToken', customToken)
+            getUserData()
+        }else{
+            // window.location.href = 'https://tapit.com.co'
+        }
+    }, [])
+
+    const getUrlParam = (paramName: string): string => {
+        const url = new URL(window.location.href)
+        const urlParam = url.searchParams.get(paramName)
+        return urlParam || ''
+    }
 
     const initialState = {
         userSession: data?.userSession || null,
@@ -73,8 +92,6 @@ const GlobalProvider: FC = ({ children }) => {
         </GlobalContext.Provider>
     )
 }
-
-
 
 // custom hook
 function useGlobalContext(): any {

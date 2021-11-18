@@ -1,7 +1,11 @@
+interface Args {
+    token: string
+}
+
 export const userSession = async (
     _: any,
-    __: any,
+    args: Args,
 { clients: { userSession } }: Context
 ) => {
-    return await userSession.getUserData()
+    return await userSession.getUserData(args)
 }
