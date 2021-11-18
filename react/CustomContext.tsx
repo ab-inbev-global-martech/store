@@ -12,13 +12,13 @@ const types = {
     showModal: 'Show city modal'
 }
 
-export const reducer = (state: any, { type, payload }: { type: string, payload: any }) => {
+export const reducer = (storage: any, { type, payload }: { type: string, payload: any }) => {
     switch(type) {
         case types.setUserData: {
             const { userSession } = payload
 
             return {
-                ...state,
+                ...storage,
                 userSession
             }
         }
@@ -32,7 +32,7 @@ export const reducer = (state: any, { type, payload }: { type: string, payload: 
             }))
 
             return {
-                ...state,
+                ...storage,
                 currentLocation: { city, postalCode, state }
             }
         }
@@ -40,12 +40,12 @@ export const reducer = (state: any, { type, payload }: { type: string, payload: 
             const { showModalSelector } = payload
 
             return {
-                ...state,
+                ...storage,
                 showModalSelector
             }
         }
         default: {
-            return state
+            return storage
         }
     }
 }
