@@ -106,14 +106,14 @@ const StoreWrapper = ({ children, CustomContext }) => {
 
   const parsedFavicons = useFavicons(faviconLinks)
 
-  const CustomContextElement = CustomContext || GlobalProvider || Fragment
+  const CustomContextElement = CustomContext || Fragment
 
   const content = (
     <OrderQueueProvider>
       <OrderFormProviderCheckout>
         <OrderItemsProvider>
           <WrapperContainer className="vtex-store__template bg-base">
-            <CustomContextElement>{children}</CustomContextElement>
+            <GlobalProvider><CustomContextElement>{children}</CustomContextElement></GlobalProvider>
           </WrapperContainer>
         </OrderItemsProvider>
       </OrderFormProviderCheckout>

@@ -3,7 +3,7 @@ import { useLazyQuery } from 'react-apollo'
 import userSessionGQL from './graphql/userSession.graphql'
 
 //create context and consumer
-const GlobalContext = React.createContext<any>([])
+const GlobalContext = React.createContext<any>({})
 
 
 const types = {
@@ -45,7 +45,7 @@ export const reducer = (storage: any, { type, payload }: { type: string, payload
             }
         }
         default: {
-            return storage
+            throw new Error('Error')
         }
     }
 }
