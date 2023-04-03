@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "hoist-non-react-statics": "^3.0.1",
-    "prop-types": "^15.5.10",
+    "prop-types": "^15.8.1",
     "query-string": "^7.0.1",
     "ramda": "^0.26.1"
   },
